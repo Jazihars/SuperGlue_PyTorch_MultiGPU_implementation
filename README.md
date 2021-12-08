@@ -40,6 +40,8 @@ tqdm              4.62.3
 typing_extensions 4.0.1
 wheel             0.37.0
 ```
+My cuda version is 11.1
+
 I haven't used apex implementation. Maybe I will implement the apex implementation in the future.
 
 This code is under MIT License.
