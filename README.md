@@ -4,6 +4,11 @@ This Python script is based on [HeatherJiaZG SuperGlue-pytorch](https://github.c
 
 If you want to run this script, please clone [HeatherJiaZG SuperGlue-pytorch](https://github.com/HeatherJiaZG/SuperGlue-pytorch) and use this script instead of original HeatherJiaZG SuperGlue-pytorch train.py。
 
+Use this command to run this script:
+``` bash
+python -m torch.distributed.launch --nproc_per_node=4 --nnodes=1 train_DistributedDataParallel.py
+```
+
 The environment is based on this(Use the command `pip list` to see, some package's version is different with HeatherJiaZG's SuperGlue-pytorch):
 ```
 Package           Version
