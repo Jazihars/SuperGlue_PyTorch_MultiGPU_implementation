@@ -2,7 +2,7 @@
 
 This Python script is based on [HeatherJiaZG SuperGlue-pytorch](https://github.com/HeatherJiaZG/SuperGlue-pytorch), but inplement the Multi-GPU training with [PyTorch DistributedDataParallel](https://pytorch.org/docs/1.8.0/generated/torch.nn.parallel.DistributedDataParallel.htmls)。
 
-## Environment prepare
+## Environment prepareing
 In my Linux termiral, run this command:
 ``` bash
 cat /etc/redhat-release
@@ -37,7 +37,7 @@ Then, let's create a new conda environment:
 conda create --name superglue python=3.8
 conda activate superglue
 ```
-Then, use these command to build the environment:
+Then, use these commands to build the environment:
 ``` bash
 conda install pytorch==1.8.0 torchvision==0.9.0 cudatoolkit=11.1
 pip install opencv-python
@@ -80,7 +80,7 @@ tqdm              4.62.3
 typing_extensions 4.0.1
 wheel             0.37.1
 ```
-My cuda version is 11.1, my torch version is 1.8.0, my torchvision version is 0.9.0, my opencv-python version is 4.5.5.62
+My `cuda` version is `11.1`, my `torch` version is `1.8.0`, my `torchvision` version is `0.9.0`, my `opencv-python` version is `4.5.5.62`
 Then change `/SuperGlue-pytorch/load_data.py` `class SparseDataset(Dataset): def __init__(self, train_path, nfeatures):`'s:
 ``` python
 self.sift = cv2.xfeatures2d.SIFT_create(nfeatures=self.nfeatures)
@@ -97,9 +97,11 @@ to
 ``` python
 if len(kp1) <= 1 or len(kp2) <= 1:
 ```
-Then use command `touch train_DistributedDataParallel.py` to create a new python script. The script's path is `/SuperGlue-pytorch/train_DistributedDataParallel.py`
-
-Copy all code of [my script](https://github.com/Jazihars/SuperGlue_PyTorch_MultiGPU_implementation/blob/main/train_DistributedDataParallel.py) into my own script `/SuperGlue-pytorch/train_DistributedDataParallel.py`.Change the data path in `/SuperGlue-pytorch/train_DistributedDataParallel.py`:
+Then use command
+``` bash
+touch train_DistributedDataParallel.py
+```
+to create a new python script. The script's path is `/SuperGlue-pytorch/train_DistributedDataParallel.py`.Copy all code of [my script](https://github.com/Jazihars/SuperGlue_PyTorch_MultiGPU_implementation/blob/main/train_DistributedDataParallel.py) into my own script `/SuperGlue-pytorch/train_DistributedDataParallel.py`.Change the data path in `/SuperGlue-pytorch/train_DistributedDataParallel.py` to this:
 ``` python
 parser.add_argument(
     "--train_path",
@@ -114,6 +116,7 @@ Run this command to start train:
 ``` bash
 python -m torch.distributed.launch --nproc_per_node=4 --nnodes=1 train_DistributedDataParallel.py
 ```
+Then you can train SuperGlue in Multi-GPU mode.
 
 I haven't used apex to implementation multi-GPU training. Maybe I will implement the apex implementation in the future.
 
