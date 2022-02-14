@@ -167,7 +167,7 @@ parser.add_argument("--batch_size", type=int, default=1, help="batch_size")
 parser.add_argument(
     "--train_path",
     type=str,
-    default="/home/users/XXX/coco2014/train2014/",
+    default="/data/XXX/coco2014/train2014/",
     help="Path to the directory of training imgs.",
 )
 parser.add_argument("--epoch", type=int, default=1, help="Number of epoches")
